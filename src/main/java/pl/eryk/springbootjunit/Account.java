@@ -5,6 +5,16 @@ public class Account {
     private boolean active;
     private Address deliveryAddress;
 
+    public Account() {
+    }
+
+    public Account(Address deliveryAddress) {
+        if (deliveryAddress != null) {
+            this.deliveryAddress = deliveryAddress;
+            this.activate();
+        }
+    }
+
     public String getLogin() {
         return login;
     }

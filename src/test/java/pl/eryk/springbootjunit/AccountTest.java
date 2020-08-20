@@ -1,11 +1,13 @@
 package pl.eryk.springbootjunit;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumingThat;
 
 
 class AccountTest {
@@ -91,5 +93,18 @@ class AccountTest {
         assertNotNull(address);
         assertThat(address, is(notNullValue()));    //hamcrest
         Assertions.assertThat(address).isNotNull();  //assertj
+    }
+
+    @RepeatedTest(2)
+    public void accountShouldBeActiveWhenAddresIsNotNull() {
+        //given
+        Address address = new Address("Polna", "Warszawa", "12");
+
+
+        //when
+        Account account = new Account(address);
+
+        //then
+        assumingThat(address != null, () -> assertTrue(account.isActive()));
     }
 }
