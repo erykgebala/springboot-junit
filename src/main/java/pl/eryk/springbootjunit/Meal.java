@@ -21,6 +21,9 @@ public class Meal {
     }
 
     public double getPromotionPrice(double promotionPercent) {
+        if (promotionPercent > 100) {
+            throw new IllegalArgumentException("Promotion percent should be lower than 100");
+        }
         return (promotionPercent * price) / 100;
     }
 
