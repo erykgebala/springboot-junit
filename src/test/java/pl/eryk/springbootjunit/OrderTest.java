@@ -1,14 +1,27 @@
 package pl.eryk.springbootjunit;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class OrderTest {
+
+    private Order order;
+
+    @BeforeEach
+    void initializaOrder() {
+        this.order = new Order();
+    }
+
+    @AfterEach
+    void cleanOrder() {
+        this.order.cancel();
+    }
 
     @Test
     public void toArraysShouldBeEquals() {
@@ -21,7 +34,6 @@ class OrderTest {
     @Test
     public void orderMealsShouldNotBeEmptyAfterAddingMealToOrder() {
         //given
-        Order order = new Order();
         Meal meal = new Meal("Pizza", 34);
 
         //when
@@ -42,7 +54,6 @@ class OrderTest {
     @Test
     public void orderMealsShouldBeInCorrectOrder() {
         //given
-        Order order = new Order();
         Meal pizza = new Meal("Pizza", 34);
         Meal burger = new Meal("Burger", 25);
 
