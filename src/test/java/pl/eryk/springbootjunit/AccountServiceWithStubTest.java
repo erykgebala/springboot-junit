@@ -35,8 +35,8 @@ class AccountServiceWithStubTest {
         }
 
         @Override
-        public void testMethod() {
-
+        public boolean testMethod(Account account) {
+            return true;
         }
     }
 }

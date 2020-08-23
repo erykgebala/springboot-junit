@@ -6,5 +6,5 @@ public interface AccountRepository {
 
     List<Account> allAccounts();
 
-    void testMethod();
+    boolean testMethod(Account account);
 }

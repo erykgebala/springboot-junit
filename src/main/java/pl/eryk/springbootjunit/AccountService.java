@@ -15,7 +15,7 @@ public class AccountService {
         List<Account> collect = this.accountRepository.allAccounts().stream()
                 .filter((a -> a.getAccountType().equals(AccountType.PRIVATE)))
                 .collect(Collectors.toList());
-        this.accountRepository.testMethod();
+        this.accountRepository.testMethod(new Account());
         return collect;
     }
 }
