@@ -4,8 +4,11 @@ import java.util.Objects;
 
 public class Meal {
 
-    final private String name;
-    final private double price;
+    private String name;
+    private double price;
+
+    public Meal() {
+    }
 
     public Meal(String name, double price) {
         this.name = name;
@@ -24,7 +27,7 @@ public class Meal {
         if (promotionPercent > 100) {
             throw new IllegalArgumentException("Promotion percent should be lower than 100");
         }
-        return (promotionPercent * price) / 100;
+        return (promotionPercent * getPrice()) / 100;
     }
 
     @Override

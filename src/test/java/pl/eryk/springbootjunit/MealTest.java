@@ -5,14 +5,23 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.Spy;
+import org.mockito.junit.jupiter.MockitoExtension;
 import pl.eryk.springbootjunit.extensions.MyTestExceptionHanlderExtension;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class MealTest {
+
+    @Spy
+    Meal mealSpy = spy(Meal.class);
 
     @Test
     void shouldReturnPromotionPrice() {
@@ -64,4 +73,17 @@ class MealTest {
         assertThat(price, lessThan(100));
     }
 
+    @Test
+    public void priceShouldHasRealValue() {
+        //given
+
+        given(mealSpy.getPrice()).willReturn(20.0);
+
+        //when
+        double price = mealSpy.getPromotionPrice(10);
+
+        //then
+        verify(mealSpy).getPrice();
+        assertThat(price, equalTo(2.0));
+    }
 }
