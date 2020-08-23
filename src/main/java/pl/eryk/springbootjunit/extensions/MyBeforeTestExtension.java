@@ -1,4 +1,4 @@
-package pl.eryk.springbootjunit;
+package pl.eryk.springbootjunit.extensions;
 
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;

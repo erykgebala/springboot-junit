@@ -7,6 +7,7 @@ public class Account {
     private AccountType accountType;
 
     public Account() {
+        this.accountType = AccountType.PRIVATE;
     }
 
     public Account(Address deliveryAddress) {
