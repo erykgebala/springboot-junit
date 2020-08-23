@@ -4,6 +4,7 @@ public class Account {
     private String login;
     private boolean active;
     private Address deliveryAddress;
+    private AccountType accountType;
 
     public Account() {
     }
@@ -13,6 +14,7 @@ public class Account {
             this.deliveryAddress = deliveryAddress;
             this.activate();
         }
+        this.accountType = AccountType.PRIVATE;
     }
 
     public String getLogin() {
@@ -37,5 +39,13 @@ public class Account {
 
     public void setDeliveryAddress(Address deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
+    }
+
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
     }
 }

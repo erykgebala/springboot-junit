@@ -3,13 +3,17 @@ package pl.eryk.springbootjunit;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.assumingThat;
 
-
+@ExtendWith(MyBeforeTestExtension.class)
 class AccountTest {
 
     @Test
@@ -107,4 +111,14 @@ class AccountTest {
         //then
         assumingThat(address != null, () -> assertTrue(account.isActive()));
     }
+
+    @ParameterizedTest
+    @EnumSource(AccountType.class)
+    public void accountStatusShouldBeAccountType(AccountType accountType) {
+        assertThat(accountType, anyOf(
+                equalTo(AccountType.PRIVATE),
+                equalTo(AccountType.COMPANY))
+        );
+    }
+
 }

@@ -15,7 +15,7 @@ public class Cart {
         this.orders.remove(order);
     }
 
-    public void clearCart() {
+    public void cleanCart() {
         this.orders.clear();
     }
 

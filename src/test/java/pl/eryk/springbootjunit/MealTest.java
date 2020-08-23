@@ -2,7 +2,12 @@ package pl.eryk.springbootjunit;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.lessThan;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -40,6 +45,22 @@ class MealTest {
         //when
         //then
         assertThrows(IllegalArgumentException.class, () -> meal.getPromotionPrice(120));
-
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = { 32, 40 , 70})
+    public void mealPricesShouldBeLoweThan100(int price) {
+        assertThat(price, lessThan(100));
+    }
+
+    @ExtendWith(MyTestExceptionHanlderExtension.class)
+    @ParameterizedTest
+    @ValueSource(ints = { 32, 40 , 110})
+    public void exceptionShouldBeThrowIfPromotionPriceIsHigherThan100WithOwnHandler(int price) {
+        if (price > 100) {
+            throw new IllegalArgumentException("Price is too big");
+        }
+        assertThat(price, lessThan(100));
+    }
+
 }
